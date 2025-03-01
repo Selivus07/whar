@@ -63,7 +63,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login Page</h2>
+        <h2>Elysian Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
@@ -82,7 +82,7 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
             
-            if (username === "admin" && password === "password") { 
+            if (username === "admin" && password === "Anacrus1s") { 
                 localStorage.setItem("loggedIn", "true");
                 const nextPage = getQueryParam("next") || "game.html";
                 window.location.href = nextPage;
@@ -121,7 +121,7 @@
                 video.loop = true; // Ensure video loops
                 video.autoplay = true; // Start playing automatically
                 video.muted = true; // Optional: mute the video
-                video.controls = true; // Optional: add controls
+                video.controls = false; // Optional: add controls
                 previewContainer.appendChild(video);
             } else {
                 const img = document.createElement("img");
