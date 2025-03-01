@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <style>
@@ -9,7 +10,7 @@
         <script>
             function checkAuth() {
                 if (localStorage.getItem("loggedIn") !== "true") {
-                    window.location.href = "/login?next=/game.html";
+                    window.location.href = "index.html?next=game.html";
                 }
             }
             window.onload = checkAuth;
