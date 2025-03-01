@@ -8,7 +8,6 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 100px;
             background: linear-gradient(135deg, #1c1c3c, #3a2a6a);
             color: white;
             height: 100vh;
@@ -19,9 +18,11 @@
         }
         .login-container {
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin-top: -50px;
         }
         input {
             display: block;
@@ -29,7 +30,7 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
-            width: 80%;
+            width: 90%;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-align: center;
@@ -50,6 +51,14 @@
         button:hover {
             background: #7b68ee;
         }
+        .image-preview {
+            margin-top: 20px;
+        }
+        .image-preview img,
+        .image-preview video {
+            width: 400px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +67,9 @@
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
+    </div>
+    <div class="image-preview">
+        <div id="preview-container"></div>
     </div>
     
     <script>
@@ -85,6 +97,41 @@
                 window.location.href = "index.html?next=" + nextPage;
             }
         }
+
+        // Function to get a random image or video from the Images folder
+        function getRandomImage() {
+            const mediaFiles = [
+                'Images/image1.jpg', 
+                'Images/image2.jpg', 
+                'Images/video1.mp4',  // MP4 video file
+                'Images/image3.gif',
+                'Images/image4.gif',
+                'Images/image5.gif',
+                'Images/image6.gif'
+            ];
+            const randomIndex = Math.floor(Math.random() * mediaFiles.length);
+            const randomMedia = mediaFiles[randomIndex];
+            
+            const previewContainer = document.getElementById("preview-container");
+            previewContainer.innerHTML = ''; // Clear previous content
+            
+            if (randomMedia.endsWith(".mp4")) {
+                const video = document.createElement("video");
+                video.src = randomMedia;
+                video.loop = true; // Ensure video loops
+                video.autoplay = true; // Start playing automatically
+                video.muted = true; // Optional: mute the video
+                video.controls = true; // Optional: add controls
+                previewContainer.appendChild(video);
+            } else {
+                const img = document.createElement("img");
+                img.src = randomMedia;
+                previewContainer.appendChild(img);
+            }
+        }
+
+        // Call the getRandomImage function to set the image or video when the page loads
+        window.onload = getRandomImage;
     </script>
 </body>
 </html>
