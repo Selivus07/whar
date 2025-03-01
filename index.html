@@ -28,7 +28,8 @@
             
             if (username === "admin" && password === "password") { 
                 localStorage.setItem("loggedIn", "true");
-                window.location.href = "game.html";
+                const nextPage = getQueryParam("next") || "game.html";
+                window.location.href = nextPage;
             } else {
                 alert("Invalid credentials");
             }
@@ -37,7 +38,7 @@
         function checkAuth() {
             if (localStorage.getItem("loggedIn") !== "true") {
                 const nextPage = encodeURIComponent(window.location.pathname + window.location.search);
-                window.location.href = "/login?next=" + nextPage;
+                window.location.href = "index.html?next=" + nextPage;
             }
         }
     </script>
