@@ -84,8 +84,18 @@
             
             if (username === "admin" && password === "Anacrus1s") { 
                 localStorage.setItem("loggedIn", "true");
-                const nextPage = getQueryParam("next") || "game.html";
-                window.location.href = nextPage;
+                // Create an invisible iframe and load about:blank
+                const iframe = document.createElement("iframe");
+                iframe.style.display = "none"; // Hide the iframe
+                document.body.appendChild(iframe);
+
+                // Once the iframe is loaded, set its location to game.html
+                iframe.onload = function() {
+                    iframe.contentWindow.location.href = "game.html";
+                };
+
+                // Set the iframe's initial URL to about:blank
+                iframe.src = "about:blank";
             } else {
                 alert("Invalid credentials");
             }
