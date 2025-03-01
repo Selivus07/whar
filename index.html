@@ -85,30 +85,24 @@
             if (username === "admin" && password === "Anacrus1s") { 
                 localStorage.setItem("loggedIn", "true");
 
-                // Open an about:blank page and change its content dynamically
+                // Open about:blank and write the entire content of game.html
                 const blankPage = window.open('about:blank', '_blank');
                 
                 // Wait for the new window to load
                 blankPage.document.open();
                 
-                // Create a basic HTML structure for the game
+                // Get the game.html content and write it to the blank page
                 const nextPage = getQueryParam("next") || "game.html";
                 
-                blankPage.document.write(`
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Game Page</title>
-                    </head>
-                    <body>
-                        <h1>Loading Game...</h1>
-                        <iframe src="${nextPage}" style="width: 100%; height: 100vh; border: none;"></iframe>
-                    </body>
-                    </html>
-                `);
-                blankPage.document.close();
+                fetch(nextPage) // Fetch the contents of game.html
+                    .then(response => response.text())
+                    .then(html => {
+                        blankPage.document.write(html); // Write the entire HTML into the about:blank page
+                        blankPage.document.close(); // Close the document stream
+                    })
+                    .catch(error => {
+                        console.error("Error loading game.html:", error);
+                    });
             } else {
                 alert("Invalid credentials");
             }
