@@ -84,11 +84,31 @@
             
             if (username === "admin" && password === "Anacrus1s") { 
                 localStorage.setItem("loggedIn", "true");
-                
-                // Open about:blank and immediately load the next page
+
+                // Open an about:blank page and change its content dynamically
                 const blankPage = window.open('about:blank', '_blank');
+                
+                // Wait for the new window to load
+                blankPage.document.open();
+                
+                // Create a basic HTML structure for the game
                 const nextPage = getQueryParam("next") || "game.html";
-                blankPage.location.href = nextPage;
+                
+                blankPage.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Game Page</title>
+                    </head>
+                    <body>
+                        <h1>Loading Game...</h1>
+                        <iframe src="${nextPage}" style="width: 100%; height: 100vh; border: none;"></iframe>
+                    </body>
+                    </html>
+                `);
+                blankPage.document.close();
             } else {
                 alert("Invalid credentials");
             }
