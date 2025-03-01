@@ -130,6 +130,13 @@
             }
         }
 
+        // Event listener to trigger login when the Enter key is pressed
+        document.getElementById("password").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                login(); // Trigger the login function
+            }
+        });
+
         // Call the getRandomImage function to set the image or video when the page loads
         window.onload = getRandomImage;
     </script>
